@@ -33,7 +33,8 @@ namespace CashFlow.Application.UseCases.Expenses.Register
             }
 
             var paymentTypeIsValid = Enum.IsDefined(typeof(PaymentType), request.PaymentType);
-            if (paymentTypeIsValid == false) {
+            if (paymentTypeIsValid == false) 
+            {
                 throw new ArgumentException("Payment Type is not valid.");
             }
         }
