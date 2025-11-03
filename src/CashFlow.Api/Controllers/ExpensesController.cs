@@ -9,8 +9,6 @@ namespace CashFlow.Api.Controllers
     public class ExpensesController : ControllerBase
     {
 
-
-
         [HttpPost]
         public IActionResult Register(
             [FromServices] IRegisterExpenseUseCase useCase,
