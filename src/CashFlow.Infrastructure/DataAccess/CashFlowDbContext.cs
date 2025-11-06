@@ -3,13 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CashFlow.Infrastructure.DataAccess
 {
-    public class CashFlowDbContext : DbContext
+    public class CashFlowDbContext(DbContextOptions options) : DbContext(options)
     {
-        public CashFlowDbContext(DbContextOptions options) : base(options) 
-        {
-                        
-        }
-
         public DbSet<Expense> Expenses { get; set; }
 
     }
