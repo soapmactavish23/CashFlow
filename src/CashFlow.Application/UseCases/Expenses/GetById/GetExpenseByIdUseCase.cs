@@ -16,11 +16,11 @@ namespace CashFlow.Application.UseCases.Expenses.GetById
             _mapper = mapper;
         }
 
-        public async Task<ResponseExpensesJson> Execute(long id)
+        public async Task<ResponseExpenseJson> Execute(long id)
         {
             var result = await _repository.GetById(id);
 
-            return _mapper.Map<ResponseExpensesJson>(result);
+            return _mapper.Map<ResponseExpenseJson>(result);
         }
     }
 }
