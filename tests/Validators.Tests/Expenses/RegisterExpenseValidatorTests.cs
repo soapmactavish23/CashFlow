@@ -1,6 +1,6 @@
-﻿using CashFlow.Application.UseCases.Expenses.Register;
+﻿
+using CashFlow.Application.UseCases.Expenses;
 using CashFlow.Communication.Enums;
-using CashFlow.Communication.Requests;
 using CashFlow.Exception;
 using CommonTestUtilities.Requests;
 using FluentAssertions;
@@ -13,7 +13,7 @@ namespace Validators.Tests.Expenses
         public void Success()
         {
             // Arrange
-            var validator = new RegisterExpenseValidator();
+            var validator = new ExpenseValidator();
             var request = RequestRegisterExpenseJsonBuilder.Builder();
 
             // Act
@@ -27,7 +27,7 @@ namespace Validators.Tests.Expenses
         public void Error_Title_Empty()
         {
             // Arrange
-            var validator = new RegisterExpenseValidator();
+            var validator = new ExpenseValidator();
             var request = RequestRegisterExpenseJsonBuilder.Builder();
             request.Title = string.Empty;
 
@@ -43,7 +43,7 @@ namespace Validators.Tests.Expenses
         public void Error_Date_Future()
         {
             // Arrange
-            var validator = new RegisterExpenseValidator();
+            var validator = new ExpenseValidator();
             var request = RequestRegisterExpenseJsonBuilder.Builder();
             request.Date = DateTime.Now.AddDays(1);
 
@@ -59,7 +59,7 @@ namespace Validators.Tests.Expenses
         public void Error_Payment_Type_Invalid()
         {
             // Arrange
-            var validator = new RegisterExpenseValidator();
+            var validator = new ExpenseValidator();
             var request = RequestRegisterExpenseJsonBuilder.Builder();
             request.PaymentType = (PaymentType) 700;
 
@@ -77,7 +77,7 @@ namespace Validators.Tests.Expenses
         public void Error_Amount_Invalid(decimal amount)
         {
             // Arrange
-            var validator = new RegisterExpenseValidator();
+            var validator = new ExpenseValidator();
             var request = RequestRegisterExpenseJsonBuilder.Builder();
             request.Amount = amount;
 

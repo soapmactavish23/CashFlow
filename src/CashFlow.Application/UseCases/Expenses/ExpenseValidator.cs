@@ -2,11 +2,11 @@
 using CashFlow.Exception;
 using FluentValidation;
 
-namespace CashFlow.Application.UseCases.Expenses.Register
+namespace CashFlow.Application.UseCases.Expenses
 {
-    public class RegisterExpenseValidator : AbstractValidator<RequestRegisterExpenseJson>
+    public class ExpenseValidator : AbstractValidator<RequestExpenseJson>
     {
-        public RegisterExpenseValidator() {
+        public ExpenseValidator() {
             RuleFor(expense => expense.Title).NotEmpty().WithMessage(ResourceErrorMessage.TITLE_REQUIRED);
             RuleFor(expense => expense.Amount).GreaterThan(0).WithMessage(ResourceErrorMessage.AMOUNT_MUST_BE_GREATER_THAN_ZERO);
             RuleFor(expense => expense.Date).LessThanOrEqualTo(DateTime.UtcNow).WithMessage(ResourceErrorMessage.EXPENSES_CANNOT_FOR_THE_FUTURE);
