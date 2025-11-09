@@ -5,7 +5,7 @@ namespace CashFlow.Application.UseCases.Expenses.Report.Excel
 {
     public class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
     {
-        public Task<byte[]> Execute(DateOnly month)
+        public async Task<byte[]> Execute(DateOnly month)
         {
             var workbook = new XLWorkbook();
 
@@ -16,6 +16,11 @@ namespace CashFlow.Application.UseCases.Expenses.Report.Excel
             var worksheet = workbook.Worksheets.Add(month.ToString("Y"));
 
             InsertHeader(worksheet);
+
+            var file = new MemoryStream();
+            workbook.SaveAs(file);
+
+            return file.ToArray();
         }
 
         private void InsertHeader(IXLWorksheet worksheet)
