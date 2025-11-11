@@ -17,6 +17,12 @@ namespace CashFlow.Application.UseCases.Expenses.Report.Excel
         public async Task<byte[]> Execute(DateOnly month)
         {
             var expenses = await _repository.FilterByMonth(month);
+
+            if(expenses.Count == 0)
+            {
+                return [];
+            }
+
             var workbook = new XLWorkbook();
 
             workbook.Author = "Henrick Nogueira";
