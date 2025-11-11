@@ -1,8 +1,10 @@
-﻿using CashFlow.Domain.Repositories.Expenses;
+﻿using CashFlow.Application.UseCases.Expenses.Report.Pdf.Fonts;
+using CashFlow.Domain.Repositories.Expenses;
+using PdfSharp.Fonts;
 
 namespace CashFlow.Application.UseCases.Expenses.Report.Pdf
 {
-    public class GenerateExpensesReportPdfUseCase
+    public class GenerateExpensesReportPdfUseCase : IGenerateExpensesReportPdfUseCase
     {
 
         private const string CURRENCY_SYMBOL = "R$";
@@ -11,6 +13,8 @@ namespace CashFlow.Application.UseCases.Expenses.Report.Pdf
         public GenerateExpensesReportPdfUseCase(IExpensesReadOnlyRepository repository)
         {
             _repository = repository;
+
+            GlobalFontSettings.FontResolver = new ExpensesReportFontResolver();
         }
 
         public async Task<byte[]> Execute(DateOnly month)
