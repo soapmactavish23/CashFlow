@@ -1,34 +1,32 @@
 ﻿using PdfSharp.Fonts;
 using System.Reflection;
 
-namespace CashFlow.Application.UseCases.Expenses.Report.Pdf.Fonts
+namespace CashFlow.Application.UseCases.Expenses.Report.Pdf.Fonts;
+public class ExpensesReportFontResolver : IFontResolver
 {
-    public class ExpensesReportFontResolver : IFontResolver
+    public byte[]? GetFont(string faceName)
     {
-        public byte[]? GetFont(string faceName)
-        {
-            var stream = ReadFontFile(faceName);
-            stream ??= ReadFontFile(FontHelper.DEFAULT_FONT);
+        var stream = ReadFontFile(faceName);
 
-            var length = (int)stream!.Length;
+        stream ??= ReadFontFile(FontHelper.DEFAULT_FONT);
 
-            var data = new byte[length];
+        var length = (int)stream!.Length;
 
-            stream.Read(buffer: data, offset: 0, count: length);
+        var data = new byte[length];
 
-            return data;
-        }
+        stream.Read(buffer: data, offset: 0, count: length);
 
-        public FontResolverInfo? ResolveTypeface(string familyName, bool bold, bool italic)
-        {
-            return new FontResolverInfo(familyName);
-        }
+        return data;
+    }
 
-        private Stream? ReadFontFile(string faceName)
-        {
-            var assembly = Assembly.GetExecutingAssembly();
+    public FontResolverInfo? ResolveTypeface(string familyName, bool bold, bool italic)
+    {
+        return new FontResolverInfo(familyName);
+    }
 
-            return assembly.GetManifestResourceStream($"CashFlow.Application.UseCases.Expenses.Reports.Pdf.Fonts.{faceName}.ttf");
-        }
+    private Stream? ReadFontFile(string faceName)
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+        return assembly.GetManifestResourceStream($"CashFlow.Application.UseCases.Expenses.Report.Pdf.Fonts.{faceName}.ttf");
     }
 }
