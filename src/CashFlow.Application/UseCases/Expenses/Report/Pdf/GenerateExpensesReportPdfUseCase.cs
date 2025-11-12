@@ -1,5 +1,7 @@
 ﻿using CashFlow.Application.UseCases.Expenses.Report.Pdf.Fonts;
+using CashFlow.Domain.Reports;
 using CashFlow.Domain.Repositories.Expenses;
+using MigraDoc.DocumentObjectModel;
 using PdfSharp.Fonts;
 
 namespace CashFlow.Application.UseCases.Expenses.Report.Pdf
@@ -26,7 +28,24 @@ namespace CashFlow.Application.UseCases.Expenses.Report.Pdf
                 return [];
             }
 
+            var document = CreateDocument(month);
+
             return [];
+        }
+
+        private Document CreateDocument(DateOnly month)
+        {
+            var document = new Document();
+
+            DateTime.Today.ToString("");
+
+            document.Info.Title = $"{ResourceReportGenerationMessages.EXPENSES_FOR} {month:Y}";
+            document.Info.Author = "Henrick Nogueira";
+
+            var style = document.Styles["Normal"];
+            style!.Font.Name = FontHelper.RALEWAY_REGULAR;
+
+            return document;
         }
 
     }
