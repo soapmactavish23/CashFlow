@@ -133,6 +133,9 @@
   <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
     <value>Despesa não encontrada.</value>
   </data>
+  <data name="INVALID_PASSWORD" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="NAME_EMPTY" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
