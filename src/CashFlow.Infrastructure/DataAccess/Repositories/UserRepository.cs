@@ -19,5 +19,10 @@ namespace CashFlow.Domain.Repositories.User
         {
             return await _dbContext.Users.AnyAsync(user => user.Email.Equals(email));
         }
+
+        public Task<Entities.User?> GetUserByEmailAndPassword(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

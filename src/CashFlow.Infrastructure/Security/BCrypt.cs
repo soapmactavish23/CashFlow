@@ -7,7 +7,13 @@ namespace CashFlow.Infrastructure.Security
     {
         public string Encrypt(string password)
         {
-            return BC.HashPassword(password);
+            string passwordHash = BC.HashPassword(password);
+
+            BC.Verify(password, passwordHash);
+
+            return passwordHash;
         }
+
+        public bool Verify(string password, string passwordHash) => BC.Verify(password, passwordHash);
     }
 }
