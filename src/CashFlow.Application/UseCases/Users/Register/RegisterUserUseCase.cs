@@ -26,8 +26,8 @@ namespace CashFlow.Application.UseCases.Users.Register
             IPasswordEncripter passwordEncripter, 
             IUserReadOnlyRepository userReadOnlyRepository,
             IUserWriteOnlyRepository userWriteOnlyRepository,
-            IUnitOfWork unitOfWork,
-            IAccessTokenGenerator tokenGenerator)
+            IAccessTokenGenerator tokenGenerator,
+            IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _passwordEncripter = passwordEncripter;

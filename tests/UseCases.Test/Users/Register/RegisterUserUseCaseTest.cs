@@ -1,4 +1,6 @@
 ﻿using CashFlow.Application.UseCases.Users.Register;
+using CommonTestUtilities.Mapper;
+using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
 using FluentAssertions;
 
@@ -21,7 +23,11 @@ namespace UseCases.Test.Users.Register
 
         private RegisterUserUseCase CreateUseCase()
         {
-            return new RegisterUserUseCase();
+            var mapper = MapperBuilder.Builder();
+            var unitOfWork = UnitOfWorkBuilder.Builder();
+            var writeRepository = UserWriteOnlyRepositoryBuilder.Builder();
+
+            return new RegisterUserUseCase(mapper, null, null, writeRepository, null, unitOfWork);
         }
     }
 }
