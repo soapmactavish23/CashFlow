@@ -31,7 +31,7 @@ namespace UseCases.Test.Users.Register
             var request = RequestRegisterUserJsonBuilder.Builder();
             request.Name = string.Empty;
 
-            var useCase = CreateUseCase();
+            var useCase = CreateUseCase(request.Email);
 
             var act = async () => await useCase.Execute(request);
 
@@ -40,19 +40,38 @@ namespace UseCases.Test.Users.Register
             result.Where(ex => ex.GetErrors().Count == 1 && ex.GetErrors().Contains(ResourceErrorMessage.NAME_EMPTY));
         }
 
-        private RegisterUserUseCase CreateUseCase()
+        [Fact]
+        public async Task Error_Email_Already_Exist()
+        {
+            var request = RequestRegisterUserJsonBuilder.Builder();
+
+            var useCase = CreateUseCase(request.Email);
+
+            var act = async () => await useCase.Execute(request);
+
+            var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
+
+            result.Where(ex => ex.GetErrors().Count() == 1 && ex.GetErrors().Contains(ResourceErrorMessage.EMAIL_ALREADY_REGISTERED);
+        }
+
+        private RegisterUserUseCase CreateUseCase(string? email = null)
         {
             var mapper = MapperBuilder.Builder();
             var unitOfWork = UnitOfWorkBuilder.Builder();
             var writeRepository = UserWriteOnlyRepositoryBuilder.Builder();
             var passwordEncripter = PasswordEncripterBuilder.Builder();
             var tokenGenerator = JwtTokenGeneratorBuilder.Builder();
-            var readRepository = new UserReadOnlyRepositoryBuilder().Builder();
+            var readRepository = new UserReadOnlyRepositoryBuilder();
+
+            if(string.IsNullOrWhiteSpace(email) == false)
+            {
+                readRepository.ExistActiveUserWithEmail(email);
+            }
 
             return new RegisterUserUseCase(
                 mapper, 
                 passwordEncripter, 
-                readRepository, 
+                readRepository.Builder(), 
                 writeRepository, 
                 tokenGenerator, 
                 unitOfWork);
