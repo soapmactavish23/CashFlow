@@ -6,14 +6,26 @@ namespace CommonTestUtilities.Cryptography
     public class PasswordEncripterBuilder
     {
 
-        public static IPasswordEncripter Builder()
+        private readonly Mock<IPasswordEncripter> _mock;
+
+        public PasswordEncripterBuilder()
         {
-            var mock = new Mock<IPasswordEncripter>();
+            _mock = new Mock<IPasswordEncripter>();
 
-            mock.Setup(passwordEncripter => passwordEncripter.Encrypt(It.IsAny<string>())).Returns("!%dlfjkd545");
-
-            return mock.Object;
+            _mock.Setup(passwordEncripter => passwordEncripter.Encrypt(It.IsAny<string>())).Returns("!%aadjAnwd545");
         }
+
+        public PasswordEncripterBuilder Verify(string? password)
+        {
+            if (string.IsNullOrEmpty(password) == false)
+            {
+                _mock.Setup(passwordEncrypter => passwordEncrypter.Verify(password, It.IsAny<string>())).Returns(true);
+            }
+
+            return this;
+        }
+
+        public IPasswordEncripter Builder() => _mock.Object;
 
     }
 }

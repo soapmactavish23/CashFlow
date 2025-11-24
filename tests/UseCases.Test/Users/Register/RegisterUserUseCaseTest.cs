@@ -31,7 +31,7 @@ namespace UseCases.Test.Users.Register
             var request = RequestRegisterUserJsonBuilder.Builder();
             request.Name = string.Empty;
 
-            var useCase = CreateUseCase(request.Email);
+            var useCase = CreateUseCase();
 
             var act = async () => await useCase.Execute(request);
 
@@ -39,6 +39,7 @@ namespace UseCases.Test.Users.Register
 
             result.Where(ex => ex.GetErrors().Count == 1 && ex.GetErrors().Contains(ResourceErrorMessage.NAME_EMPTY));
         }
+
 
         [Fact]
         public async Task Error_Email_Already_Exist()
@@ -51,7 +52,7 @@ namespace UseCases.Test.Users.Register
 
             var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
 
-            result.Where(ex => ex.GetErrors().Count() == 1 && ex.GetErrors().Contains(ResourceErrorMessage.EMAIL_ALREADY_REGISTERED);
+            result.Where(ex => ex.GetErrors().Count() == 1 && ex.GetErrors().Contains(ResourceErrorMessage.EMAIL_ALREADY_REGISTERED));
         }
 
         private RegisterUserUseCase CreateUseCase(string? email = null)
@@ -59,7 +60,7 @@ namespace UseCases.Test.Users.Register
             var mapper = MapperBuilder.Builder();
             var unitOfWork = UnitOfWorkBuilder.Builder();
             var writeRepository = UserWriteOnlyRepositoryBuilder.Builder();
-            var passwordEncripter = PasswordEncripterBuilder.Builder();
+            var passwordEncripter = new PasswordEncripterBuilder().Builder();
             var tokenGenerator = JwtTokenGeneratorBuilder.Builder();
             var readRepository = new UserReadOnlyRepositoryBuilder();
 

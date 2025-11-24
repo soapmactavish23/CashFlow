@@ -8,7 +8,7 @@ namespace CommonTestUtilities.Entities
     {
         public static User Builder()
         {
-            var passwordEncripter = PasswordEncripterBuilder.Builder();
+            var passwordEncripter = new PasswordEncripterBuilder().Builder();
 
             var user = new Faker<User>()
                 .RuleFor(u => u.Id, _ => 1)
