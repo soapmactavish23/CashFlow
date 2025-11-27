@@ -11,19 +11,33 @@ namespace WebApi.Test
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            builder.UseEnvironment("Test")
+            builder
+                .UseEnvironment("Test")
                 .ConfigureServices(services =>
                 {
-                    services.AddDbContext<CashFlowDbContext>(config =>
+                    var descriptor = services.SingleOrDefault(
+                        d => d.ServiceType == typeof(DbContextOptions<CashFlowDbContext>));
+
+                    if (descriptor != null)
+                        services.Remove(descriptor);
+
+                    var provider = new ServiceCollection()
+                        .AddEntityFrameworkInMemoryDatabase()
+                        .BuildServiceProvider();
+
+                    services.AddDbContext<CashFlowDbContext>(options =>
                     {
-
-                        var provider = services.AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
-
-                        config.UseInMemoryDatabase("InMemoryDbForTesting");
-                        config.UseInternalServiceProvider(provider);
+                        options.UseInMemoryDatabase("InMemoryDbForTesting");
+                        options.UseInternalServiceProvider(provider);
                     });
+
+                    var sp = services.BuildServiceProvider();
+                    using var scope = sp.CreateScope();
+                    var db = scope.ServiceProvider.GetRequiredService<CashFlowDbContext>();
+                    db.Database.EnsureCreated();
                 });
         }
-
     }
+
 }
+
