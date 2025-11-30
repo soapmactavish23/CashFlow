@@ -32,7 +32,7 @@ namespace CashFlow.Infrastructure.Services.LoggedUser
             return await _dbContext
                 .Users
                 .AsNoTracking()
-                .FirstAsync(user => user.UserIdentifier == Guid.Parse(identifier)));
+                .FirstAsync(user => user.UserIdentifier == Guid.Parse(identifier));
         }
     }
 }
