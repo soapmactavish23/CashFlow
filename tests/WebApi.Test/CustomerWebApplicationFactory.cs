@@ -63,13 +63,26 @@ namespace WebApi.Test
 
         private void StartDatabase(CashFlowDbContext dbContext, IPasswordEncripter passwordEncripter)
         {
+            AddUsers(dbContext, passwordEncripter);
+            AddExpenses(dbContext, _user);
+            dbContext.SaveChanges();
+        }
+
+        private void AddUsers(CashFlowDbContext dbContext, IPasswordEncripter passwordEncripter)
+        {
             _user = UserBuilder.Builder();
             _password = _user.Password;
             _user.Password = passwordEncripter.Encrypt(_user.Password);
 
             dbContext.Users.Add(_user);
 
-            dbContext.SaveChanges();
+        }
+
+        private void AddExpenses(CashFlowDbContext dbContext, User user)
+        {
+            var expense = ExpenseBuilder.Build(user);
+
+            dbContext.Expenses.Add(expense);
         }
     }
 
