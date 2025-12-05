@@ -13,6 +13,8 @@ namespace WebApi.Test
     public class CustomerWebApplicationFactory : WebApplicationFactory<Program>
     {
 
+        private Expense _expense;
+
         private User _user;
         private string _password;
         private string _token;
@@ -58,8 +60,8 @@ namespace WebApi.Test
         public string GetName() => _user.Name;
         public string GetEmail() => _user.Email;
         public string GetPassword() => _password;
-
         public string GetToken() => _token;
+        public long GetExpenseId() => _expense.Id;
 
         private void StartDatabase(CashFlowDbContext dbContext, IPasswordEncripter passwordEncripter)
         {
@@ -80,9 +82,9 @@ namespace WebApi.Test
 
         private void AddExpenses(CashFlowDbContext dbContext, User user)
         {
-            var expense = ExpenseBuilder.Build(user);
+            _expense = ExpenseBuilder.Build(user);
 
-            dbContext.Expenses.Add(expense);
+            dbContext.Expenses.Add(_expense);
         }
     }
 
