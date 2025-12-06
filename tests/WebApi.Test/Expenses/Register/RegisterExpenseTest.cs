@@ -17,7 +17,7 @@ namespace WebApi.Test.Expenses.Register
         public RegisterExpenseTest(CustomerWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
         {
             _httpClient = webApplicationFactory.CreateClient();
-            _token = webApplicationFactory.GetToken();
+            _token = webApplicationFactory.User_Team_Member.GetToken();
         }
 
         [Fact]

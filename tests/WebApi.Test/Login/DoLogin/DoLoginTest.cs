@@ -19,9 +19,9 @@ namespace WebApi.Test.Login.DoLogin
 
         public DoLoginTest(CustomerWebApplicationFactory webApplicationFactory) : base(webApplicationFactory) 
         {
-            _email = webApplicationFactory.GetEmail();
-            _password = webApplicationFactory.GetPassword();
-            _name = webApplicationFactory.GetName();
+            _email = webApplicationFactory.User_Team_Member.GetEmail();
+            _password = webApplicationFactory.User_Team_Member.GetPassword();
+            _name = webApplicationFactory.User_Team_Member.GetName();
         }
 
         [Fact]
