@@ -23,7 +23,7 @@ namespace WebApi.Test.Expenses.Register
         [Fact]
         public async Task Success()
         {
-            var request = RequestRegisterExpenseJsonBuilder.Builder();
+            var request = RequestExpenseJsonBuilder.Builder();
 
             var result = await DoPost(METHOD, request, token: _token);
 
@@ -40,7 +40,7 @@ namespace WebApi.Test.Expenses.Register
         [Fact]
         public async Task Error_Title_Empty()
         {
-            var request = RequestRegisterExpenseJsonBuilder.Builder();
+            var request = RequestExpenseJsonBuilder.Builder();
             request.Title = string.Empty;
 
             var result = await DoPost(METHOD, request, token: _token);
