@@ -20,8 +20,6 @@ namespace CommonTestUtilities.Repositories
             return this;
         }
 
-        public IExpensesReadOnlyRepository Builder() => _repository.Object;
-
         public ExpenseReadOnlyRepositoryBuilder GetById(User user, Expense? expense)
         {
             if (expense is not null)
@@ -31,5 +29,14 @@ namespace CommonTestUtilities.Repositories
 
             return this;
         }
+
+        public ExpenseReadOnlyRepositoryBuilder FilterByMonth(User user, List<Expense> expenses)
+        {
+            _repository.Setup(repository => repository.FilterByMonth(user, It.IsAny<DateOnly>())).ReturnsAsync(expenses);
+            return this;
+        }
+
+        public IExpensesReadOnlyRepository Builder() => _repository.Object;
+
     }
 }
