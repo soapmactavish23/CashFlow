@@ -9,6 +9,7 @@ using CashFlow.Application.UseCases.Expenses.Update;
 using CashFlow.Application.UseCases.Login.DoLogin;
 using CashFlow.Application.UseCases.Users.Profile;
 using CashFlow.Application.UseCases.Users.Register;
+using CashFlow.Application.UseCases.Users.Update;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CashFlow.Application
@@ -36,6 +37,9 @@ namespace CashFlow.Application
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
             services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
+            services.AddScoped<IUpdateExpenseUseCase, UpdateExpenseUseCase>();
+            services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+            
         }
     }
 }
