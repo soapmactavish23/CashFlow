@@ -123,9 +123,6 @@
   <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
     <value>E-mail already registered.</value>
   </data>
-  <data name="EMAIL_EMPTY" xml:space="preserve">
-    <value>E-mail not must be empty.</value>
-  </data>
   <data name="EMAIL_INVALID" xml:space="preserve">
     <value>E-mail must be valid.</value>
   </data>
@@ -143,6 +140,9 @@
   </data>
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>Name not must be empty.</value>
+  </data>
+  <data name="PASSWORD_DIFERENT_CURRENT_PASSWORD" xml:space="preserve">
+    <value>Password not matches</value>
   </data>
   <data name="PAYMENT_TYPE_INVALID" xml:space="preserve">
     <value>Payment Type is not valid.</value>

@@ -79,15 +79,6 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E-mail not must be empty..
-        /// </summary>
-        public static string EMAIL_EMPTY {
-            get {
-                return ResourceManager.GetString("EMAIL_EMPTY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to E-mail must be valid..
         /// </summary>
         public static string EMAIL_INVALID {
@@ -138,6 +129,15 @@ namespace CashFlow.Exception {
         public static string NAME_EMPTY {
             get {
                 return ResourceManager.GetString("NAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password not matches.
+        /// </summary>
+        public static string PASSWORD_DIFERENT_CURRENT_PASSWORD {
+            get {
+                return ResourceManager.GetString("PASSWORD_DIFERENT_CURRENT_PASSWORD", resourceCulture);
             }
         }
         
