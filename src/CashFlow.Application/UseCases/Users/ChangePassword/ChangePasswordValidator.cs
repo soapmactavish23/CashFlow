@@ -7,7 +7,7 @@ namespace CashFlow.Application.UseCases.Users.ChangePassword
     {
         public ChangePasswordValidator()
         {
-            RuleFor(x => x.NewPassword).SetValidator(new PasswordValidator<RequestChangePasswordJson>());
+            RuleFor(x => x.NewPassword).SetValidator(new CashFlow.Application.UseCases.Users.PasswordValidator<RequestChangePasswordJson>());
         }
     }
 }

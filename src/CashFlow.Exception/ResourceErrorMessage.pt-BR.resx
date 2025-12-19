@@ -123,6 +123,9 @@
   <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
     <value>E-mail já existente.</value>
   </data>
+  <data name="EMAIL_EMPTY" xml:space="preserve">
+    <value>O email não deve estar vazio</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="EMAIL_INVALID" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
