@@ -42,6 +42,8 @@ namespace CashFlow.Application.UseCases.Expenses.Update
                 throw new NotFoundException(ResourceErrorMessage.EXPENSE_NOT_FOUND);
             }
 
+            expense.Tags.Clear();
+
             _mapper.Map(request, expense);
 
             _repository.Update(expense);
