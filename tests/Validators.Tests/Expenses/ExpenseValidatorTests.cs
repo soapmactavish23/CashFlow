@@ -7,7 +7,7 @@ using FluentAssertions;
 
 namespace Validators.Tests.Expenses
 {
-    public class RegisterExpenseValidatorTests
+    public class ExpenseValidatorTests
     {
         [Fact]
         public void Success()
@@ -87,6 +87,22 @@ namespace Validators.Tests.Expenses
             // Assert
             result.IsValid.Should().BeFalse();
             result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessage.AMOUNT_MUST_BE_GREATER_THAN_ZERO));
+        }
+
+        [Fact]
+        public void Error_Tag_Invalid()
+        {
+            // Arrange
+            var validator = new ExpenseValidator();
+            var request = RequestExpenseJsonBuilder.Builder();
+            request.Tags.Add((Tag)1000);
+
+            // Act
+            var result = validator.Validate(request);
+
+            // Assert
+            result.IsValid.Should().BeFalse();
+            result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessage.TAG_TYPE_NOT_SUPPORTED));
         }
     }
 }
